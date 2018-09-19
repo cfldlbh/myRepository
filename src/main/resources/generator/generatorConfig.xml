@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="jdbc.properties"></properties>
+    <classPathEntry location="D:\source\repo\mysql\mysql-connector-java\5.1.35\mysql-connector-java-5.1.35.jar"/>
+    <context id="mydemoDB" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"></property>
+        </commentGenerator>
+        <jdbcConnection driverClass="${driver}" connectionURL="${url}" password="${password}" userId="${user}"/>
+        <javaModelGenerator targetPackage="com.lbh.cfld.domain" targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--mapper映射XML生成位置-->
+        <sqlMapGenerator targetPackage="sqlmapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!--mapper接口生成位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lbh.cfld.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        <table tableName="User">
+
+            <generatedKey column="userId" sqlStatement="MySql" identity="true"/>
+
+        </table>
+        <table tableName="role">
+            <generatedKey column="r_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="role_user">
+            <generatedKey column="ur_id" sqlStatement="MySql" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>
