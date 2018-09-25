@@ -1,5 +1,8 @@
 package com.lbh.cfld.config;
 
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -24,5 +27,18 @@ public class WebConfiguration extends WebMvcConfigurerAdapter{
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer){
         configurer.enable();
+    }
+
+    @Bean
+    public DefaultWebSecurityManager securityManager(){
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        return securityManager;
+    }
+    @Bean
+    public ShiroFilterFactoryBean shiroFilter(){
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        shiroFilterFactoryBean.setSecurityManager(securityManager());
+        shiroFilterFactoryBean.setLoginUrl("/");
+        return shiroFilterFactoryBean;
     }
 }

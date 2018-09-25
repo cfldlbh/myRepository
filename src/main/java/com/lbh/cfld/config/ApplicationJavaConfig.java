@@ -1,7 +1,10 @@
 package com.lbh.cfld.config;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.ServletContext;
 
 public class ApplicationJavaConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
     private static final Logger logger = Logger.getLogger(ApplicationJavaConfig.class);
@@ -21,4 +24,9 @@ public class ApplicationJavaConfig extends AbstractAnnotationConfigDispatcherSer
     protected String[] getServletMappings() {
         return new String[]{"/"};
 }
+    @Override
+    public  void onStartup(ServletContext servletContext){
+        servletContext.addFilter("shiroFilter", "ShiroFilterFactoryBean");
+    }
+
 }

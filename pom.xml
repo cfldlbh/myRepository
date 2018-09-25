@@ -98,7 +98,7 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.30</version>
     </dependency>
-    <!-- c3p0连接池jar --> 
+    <!-- c3p0连接池jar -->
     <dependency>
       <groupId>c3p0</groupId>
       <artifactId>c3p0</artifactId>
