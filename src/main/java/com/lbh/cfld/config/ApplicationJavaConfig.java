@@ -26,7 +26,7 @@ public class ApplicationJavaConfig extends AbstractAnnotationConfigDispatcherSer
 }
     @Override
     public  void onStartup(ServletContext servletContext){
-        servletContext.addFilter("shiroFilter", "ShiroFilterFactoryBean");
+        servletContext.addFilter("shiroFilter", "org.springframework.web.filter.DelegatingFilterProxy");
     }
 
 }
