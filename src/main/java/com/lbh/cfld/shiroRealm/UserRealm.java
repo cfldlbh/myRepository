@@ -23,7 +23,6 @@ public class UserRealm extends AuthorizingRealm {
             throw new UnknownAccountException();
         }
         SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(user.getLoginname(), user.getPassword(), getName());
-
         return simpleAuthenticationInfo;
     }
 }
