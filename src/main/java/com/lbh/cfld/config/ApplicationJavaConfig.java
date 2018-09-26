@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 
 public class ApplicationJavaConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -24,9 +25,9 @@ public class ApplicationJavaConfig extends AbstractAnnotationConfigDispatcherSer
     protected String[] getServletMappings() {
         return new String[]{"/"};
 }
-    @Override
+/*    @Override
     public  void onStartup(ServletContext servletContext){
-        servletContext.addFilter("shiroFilter", "org.springframework.web.filter.DelegatingFilterProxy");
-    }
+        FilterRegistration.Dynamic shiroFilter = servletContext.addFilter("shiroFilter", "org.springframework.web.filter.DelegatingFilterProxy");
+    }*/
 
 }

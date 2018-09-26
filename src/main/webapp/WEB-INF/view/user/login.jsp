@@ -29,14 +29,14 @@
             <div class="layui-form-mid layui-word-aux">请输入6到20位的密码</div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">手机号：</label>
+            <label class="layui-form-label">验证码:</label>
             <div class="layui-input-block">
-                <input type="text" name="phone" required="" lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input" maxlength="11">
+                <input type="text" name="verify" required="" lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input" maxlength="5">
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="formDemo">立即提交</button>
+                <button class="layui-btn" lay-submit="" lay-filter="formDemo">登录</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
