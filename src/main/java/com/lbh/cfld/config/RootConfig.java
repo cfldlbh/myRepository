@@ -22,7 +22,10 @@ import java.io.IOException;
 @ComponentScan(value = "com.lbh.cfld.service",
         excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,value = EnableWebMvc.class)})
 public class RootConfig  {
-    private static final Logger log = Logger.getLogger(ApplicationJavaConfig.class);
+    private static final Logger log = Logger.getLogger(RootConfig.class);
+    public RootConfig(){
+        log.info("ContextLoaderListener加载配置类");
+    }
     @Bean
     public ComboPooledDataSource dataSource(@Value("${user}")String user,@Value("${password}") String password,@Value("${driver}") String driverClass,@Value("${url}")String url){
         ComboPooledDataSource dataSource = new ComboPooledDataSource();

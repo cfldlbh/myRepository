@@ -1,6 +1,7 @@
 package com.lbh.cfld.config;
 
 import com.lbh.cfld.shiroRealm.UserRealm;
+import org.apache.log4j.Logger;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -18,6 +19,10 @@ import java.util.HashMap;
 @EnableAspectJAutoProxy
 @ComponentScan({"com.lbh.cfld.controller","com.lbh.cfld.aop"})
 public class WebConfiguration extends WebMvcConfigurerAdapter{
+    private static final Logger log = Logger.getLogger(WebConfiguration.class);
+    public WebConfiguration(){
+        log.info("DispatcherServlet加载");
+    }
     @Bean
     public ViewResolver viewResolver(){
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -43,7 +48,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter{
         securityManager.setRealm(userRealm());
         return securityManager;
     }
-    @Bean
+    @Bean("shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(){
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("/Login/user/login","anon");
