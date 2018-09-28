@@ -1,7 +1,10 @@
 package com.lbh.cfld.shiroRealm;/*
  */
 
+import com.lbh.cfld.dao.RoleUserMapper;
 import com.lbh.cfld.dao.UserMapper;
+import com.lbh.cfld.domain.Role;
+import com.lbh.cfld.domain.RoleUser;
 import com.lbh.cfld.domain.User;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -9,10 +12,17 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+
 public class UserRealm extends AuthorizingRealm {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RoleUserMapper roleUserMapper;
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        User primaryPrincipal = (User)principals.getPrimaryPrincipal();
+        ArrayList<String> roles = roleUserMapper.selectUserRoleByUid(primaryPrincipal.getUserid());
+
         return null;
     }
 

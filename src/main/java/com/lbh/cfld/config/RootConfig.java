@@ -1,8 +1,11 @@
 package com.lbh.cfld.config;
 
 import com.lbh.cfld.domain.User;
+import com.lbh.cfld.shiroRealm.UserRealm;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.log4j.Logger;
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.beans.PropertyVetoException;
 import java.io.IOException;
+import java.util.HashMap;
 
 @Configuration
 @PropertySource("classpath:jdbc.properties")
@@ -57,5 +61,26 @@ public class RootConfig  {
     @Bean
     public static PropertySourcesPlaceholderConfigurer placeholderConfigurer(){
         return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean("userRealm")
+    public UserRealm userRealm(){
+        UserRealm userRealm = new UserRealm();
+        return userRealm;
+    }
+    @Bean("securityManager")
+    public DefaultWebSecurityManager securityManager(UserRealm userRealm){
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        securityManager.setRealm(userRealm);
+        return securityManager;
+    }
+    @Bean("shiroFilter")
+    public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager){
+        HashMap<String, String> map = new HashMap<String, String>();
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        shiroFilterFactoryBean.setSecurityManager(securityManager);
+        shiroFilterFactoryBean.setLoginUrl("/jump/user/Login");
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
+        return shiroFilterFactoryBean;
     }
 }

@@ -37,25 +37,5 @@ public class WebConfiguration extends WebMvcConfigurerAdapter{
         configurer.enable();
     }
 
-    @Bean
-    public UserRealm userRealm(){
-        UserRealm userRealm = new UserRealm();
-        return userRealm;
-    }
-    @Bean
-    public DefaultWebSecurityManager securityManager(){
-        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(userRealm());
-        return securityManager;
-    }
-    @Bean("shiroFilter")
-    public ShiroFilterFactoryBean shiroFilter(){
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("/Login/user/login","anon");
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        shiroFilterFactoryBean.setSecurityManager(securityManager());
-        shiroFilterFactoryBean.setLoginUrl("/");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
-        return shiroFilterFactoryBean;
-    }
+
 }
