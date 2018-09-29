@@ -8,6 +8,7 @@ import com.lbh.cfld.domain.RoleUser;
 import com.lbh.cfld.domain.User;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,9 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         User primaryPrincipal = (User)principals.getPrimaryPrincipal();
         ArrayList<String> roles = roleUserMapper.selectUserRoleByUid(primaryPrincipal.getUserid());
-
-        return null;
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        simpleAuthorizationInfo.addStringPermissions(roles);
+        return simpleAuthorizationInfo;
     }
 
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {

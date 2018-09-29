@@ -177,6 +177,6 @@
     where ur_id = #{urId,jdbcType=INTEGER}
   </update>
   <select id="selectUserRoleByUid" >
-      select r.roleName from role r where r.r_id in (select  role_id from role_user where user_id = #{uid})
+      select r.roleName from role r where r.r_id  = #{uid}
   </select>
 </mapper>
